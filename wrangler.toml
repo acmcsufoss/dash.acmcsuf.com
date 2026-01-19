@@ -2,6 +2,8 @@ name = "dash"
 main = ".svelte-kit/cloudflare/_worker.js"
 compatibility_date = "2026-01-14"
 compatibility_flags = [ "nodejs_als", "nodejs_compat" ]
+workers_dev = true
+preview_urls = true
 
 [assets]
 binding = "ASSETS"
@@ -9,3 +11,7 @@ directory = ".svelte-kit/cloudflare"
 
 [observability]
 enabled = true
+
+[[routes]]
+pattern = "dash.acmcsuf.com"
+custom_domain = true
