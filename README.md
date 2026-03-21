@@ -2,23 +2,30 @@
 
 ## Developing
 
-Install deps with `bun install`.  
+Install deps with `pnpm i`.  
 
 Start dev server:
 
 ```sh
-bun run dev
+pnpm dev
 
 # or start the server and open the app in a new browser tab
-bun run dev -- --open
+pnpm dev --open
 ```
 
-## Building
+## Building and Previewing
 
 To create a production version of your app:
 
 ```sh
-bun run build
+pnpm build
 ```
 
-You can preview the production build with `bun run preview`.
+You can now preview the production build:
+
+```sh
+pnpm preview
+```
+
+> Using the preview after making changes is important because vite uses the NodeJS runtime but the app uses the Workers runtime in production.
+
