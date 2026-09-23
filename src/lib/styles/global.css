@@ -1,0 +1,130 @@
+/*
+  global.css
+  ----------
+  this is the one stylesheet that applies to the whole app.
+  it answers three questions for every page:
+    1. what colors do we use? (css variables / "design tokens")
+    2. what font do we use?
+    3. what do headings, text, and links look like by default?
+
+  because it's imported once in +layout.svelte, every route gets it for free.
+
+  demo tip: open the homepage ("/") while presenting this file - the dark
+  navy background behind everything, and the blue "sign in with discord"
+  button, both come directly from the variables below.
+
+  everything below is wrapped in "@layer base". tailwind (imported in
+  layout.css) puts all of its own utility classes - things like mx-auto,
+  max-w-xl, text-neutral-500 - inside css "cascade layers". a plain css
+  rule with no layer always beats a layered rule, no matter how specific
+  the layered rule is. without "@layer base" here, our simple `* { margin:
+  0 }` reset was silently cancelling tailwind's `.mx-auto`, which is why
+  the homepage looked left-aligned instead of centered. putting our base
+  styles in the same "base" layer tailwind itself uses fixes that, while
+  still letting tailwind's utility classes win when both apply to the
+  same element (which is exactly what we want).
+*/
+@layer base {
+	/* ------------------------------------------------------------------ */
+	/* 1. theme variables                                                  */
+	/* ------------------------------------------------------------------ */
+	/* :root is the <html> element. putting variables here makes them
+	   "global" - any css file (including button.svelte) can read them
+	   with var(--name-of-variable). this is the single source of truth
+	   for our color palette, so changing a brand color only means
+	   editing it in one place. */
+	:root {
+		/* brand / action colors - used for buttons, links, highlights */
+		--color-primary: #05a3ff; /* bright blue - this is also the Button component's default color */
+		--color-primary-hover: #3cb8ff; /* lighter, used on hover */
+		/* demo: this exact blue is what colors the "sign in with discord"
+		   button on the homepage - button.svelte reads it automatically
+		   because that's its default color prop value */
+
+		--color-secondary: #082863; /* deep navy blue - secondary accents */
+		--color-secondary-hover: #0b3a86;
+
+		--color-danger: #dc2626; /* red - destructive actions (delete, etc.) */
+		--color-danger-hover: #b91c1c;
+
+		/* text + background colors */
+		--color-text: #f5f9ff; /* near-white, readable against the dark background below */
+		--color-text-muted: #93b4d9; /* soft blue-gray, for secondary/helper text */
+		--color-background: #041536; /* very dark navy - the whole app's background color */
+		/* demo: this is why the page behind the white header bar looks
+		   dark navy instead of white - it's the <body> background, set
+		   once here and inherited by every page. */
+
+		/* reusable values so spacing/roundness stays consistent everywhere */
+		--radius-base: 8px; /* demo: this is the rounded corner on every button */
+		--font-family-base:
+			'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+		/* demo: this font is visible on every heading and paragraph on the page */
+	}
+
+	/* ------------------------------------------------------------------ */
+	/* 2. global reset                                                     */
+	/* ------------------------------------------------------------------ */
+	/* every browser ships slightly different default spacing/sizing.
+	   this reset makes all elements start from the same blank slate so
+	   layouts behave predictably. */
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box; /* padding/border no longer add to an element's width */
+		margin: 0; /* remove every browser's built-in margins */
+		padding: 0; /* remove every browser's built-in padding */
+	}
+
+	/* ------------------------------------------------------------------ */
+	/* 3. base typography                                                  */
+	/* ------------------------------------------------------------------ */
+	/* demo: everything in this section is what makes the homepage's "Welcome
+	   to dash.acmcsuf.com" heading and body text look the way they do,
+	   without a single style being written on the page itself. */
+	body {
+		font-family: var(--font-family-base); /* apply our chosen font everywhere */
+		color: var(--color-text); /* default text color */
+		background-color: var(--color-background); /* default page background */
+		line-height: 1.6; /* comfortable spacing between lines of text */
+		-webkit-font-smoothing: antialiased; /* nicer font rendering on mac/ios */
+	}
+
+	/* headings share a bolder weight and tighter line-height than body text */
+	h1,
+	h2,
+	h3,
+	h4 {
+		font-weight: 700;
+		line-height: 1.25;
+	}
+
+	/* font sizes step down as heading level increases (h1 biggest, h4 smallest) */
+	h1 {
+		font-size: 2.25rem; /* demo: this is the "Welcome to dash.acmcsuf.com" title */
+	}
+	h2 {
+		font-size: 1.75rem; /* demo: this is the "Upcoming" subheading */
+	}
+	h3 {
+		font-size: 1.375rem;
+	}
+	h4 {
+		font-size: 1.125rem;
+	}
+
+	/* paragraphs use the muted color so headings stand out more */
+	p {
+		color: var(--color-text-muted);
+	}
+
+	/* links inherit our primary color instead of the browser's default blue */
+	a {
+		color: var(--color-primary);
+		text-decoration: none; /* remove the default underline */
+	}
+
+	a:hover {
+		text-decoration: underline; /* bring the underline back only on hover */
+	}
+}

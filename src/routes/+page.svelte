@@ -1,4 +1,11 @@
 <script lang="ts">
+	// goto lets us navigate client-side, the same way clicking a normal
+	// <a href> link would, but from inside a click handler.
+	import { goto } from '$app/navigation';
+	// our reusable button component - see src/lib/components/Button.svelte.
+	// demo: this is the same component used below for "sign in with discord".
+	import Button from '$lib/components/Button.svelte';
+
 	const tabs = ['All', 'Events', 'Workshops'];
 	let active = $state('All');
 
@@ -26,10 +33,17 @@
 </header>
 
 <main class="mx-auto flex max-w-xl flex-col gap-8 p-6 text-center">
+	<!-- demo: this heading's color and font both come from global.css's
+	     body styles - nothing here sets them directly. -->
 	<h1 class="text-2xl">Welcome to dash.acmcsuf.com</h1>
 
+	<!-- demo: <Button> replaces what used to be a plain <a> link.
+	     onclick calls goto() to still navigate to /auth/discord, but now
+	     we get our shared color/hover-animation styling for free.
+	     hover it live to show the sideways bounce + outline animation,
+	     and point out that its blue color is global.css's --color-primary. -->
 	<p>
-		<a href="/auth/discord" class="rounded-full border px-6 py-3">Sign in with Discord</a>
+		<Button onclick={() => goto('/auth/discord')}>Sign in with Discord</Button>
 	</p>
 
 	<h2>Upcoming {active}</h2>
