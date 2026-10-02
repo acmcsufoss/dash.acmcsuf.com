@@ -1,4 +1,5 @@
 @layer base {
+<<<<<<< HEAD
 	:root {
 		--color-primary: #05a3ff;
 		--color-primary-hover: #3cb8ff;
@@ -68,3 +69,74 @@
 		text-decoration: underline;
 	}
 }
+=======
+    :root {
+        --color-primary: #05a3ff;
+        --color-primary-hover: #3cb8ff;
+
+        --color-secondary: #082863;
+        --color-secondary-hover: #0b3a86;
+
+        --color-danger: #dc2626;
+        --color-danger-hover: #b91c1c;
+
+        --color-text: #f5f9ff;
+        --color-text-muted: #93b4d9;
+        --color-background: #041536;
+
+        --radius-base: 8px;
+        --font-family-base:
+            'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: var(--font-family-base);
+        color: var(--color-text);
+        background-color: var(--color-background);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        font-weight: 700;
+        line-height: 1.25;
+    }
+
+    h1 {
+        font-size: 2.25rem;
+    }
+    h2 {
+        font-size: 1.75rem;
+    }
+    h3 {
+        font-size: 1.375rem;
+    }
+    h4 {
+        font-size: 1.125rem;
+    }
+
+    p {
+        color: var(--color-text-muted);
+    }
+
+    a {
+        color: var(--color-primary);
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+}
+>>>>>>> d3efd61 (Test)
